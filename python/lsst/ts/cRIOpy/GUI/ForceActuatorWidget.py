@@ -35,6 +35,7 @@ from ..M1M3FATable import (
     FATABLE,
     FATABLE_NEAR_NEIGHBOR_INDEX,
     FATABLE_FAR_NEIGHBOR_INDEX,
+    actuatorIDToIndex,
     nearNeighborIndices,
     onlyFarNeighborIndices,
 )
@@ -70,6 +71,7 @@ class ForceActuatorWidget(QWidget):
 
         self.field = None
         self._topic = None
+        self._selectedIndex = None
 
         layout = QHBoxLayout()
         plotLayout = QVBoxLayout()
@@ -204,11 +206,13 @@ class ForceActuatorWidget(QWidget):
             Contains id (selected actuator ID), data (selected actuator current value) and warning (boolean, true if value is in warning).
         """
         if s is None:
+            self._selectedIndex = None
             self.selectedActuatorIdLabel.setText("not selected")
             self.selectedActuatorValueLabel.setText("")
             self.selectedActuatorWarningLabel.setText("")
             return
 
+        self._selectedIndex = actuatorIDToIndex(s.id)
         self.selectedActuatorIdLabel.setText(str(s.id))
         self.selectedActuatorValueLabel.setText(s.getValue())
         self.selectedActuatorWarningLabel.setValue(s.warning)
@@ -259,4 +263,8 @@ class ForceActuatorWidget(QWidget):
         if data is None:
             self._setUnknown()
         else:
-            self.lastUpdatedLabel.setTime(data.timestamp)
+            try:
+                self.lastUpdatedLabel.setTime(data.timestamp)
+            except AttributeError:
+                if self._selectedIndex is not None:
+                    self.lastUpdatedLabel.setTime(data.timestamps[self._selectedIndex])
