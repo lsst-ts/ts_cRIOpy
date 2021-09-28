@@ -69,33 +69,6 @@ class Topics:
 
         self.topics = [
             TopicData(
-                "FA Cylinder Pressures",
-                [
-                    TopicField(
-                        "Primary Cylinders Push",
-                        "primaryCylinderPushPressures",
-                        FATABLE_ZINDEX,
-                    ),
-                    TopicField(
-                        "Primary Cylinders Pull",
-                        "primaryCylinderPullPressures",
-                        FATABLE_ZINDEX,
-                    ),
-                    TopicField(
-                        "Secondary Cylinder Push",
-                        "secondaryCylinderPushPressures",
-                        FATABLE_SINDEX,
-                    ),
-                    TopicField(
-                        "Secondary Cylinder Pull",
-                        "secondaryCylinderPullPressures",
-                        FATABLE_SINDEX,
-                    ),
-                ],
-                "forceActuatorPressure",
-                False,
-            ),
-            TopicData(
                 "Applied Aberration Forces",
                 [TopicField("Z Forces", "zForces", FATABLE_ZINDEX)],
                 "appliedAberrationForces",
@@ -310,7 +283,7 @@ class Topics:
                 "preclippedVelocityForces",
             ),
             TopicData(
-                "Measured forces",
+                "Measured Forces",
                 [
                     TopicField(
                         "Primary Cylinder Forces",
@@ -339,6 +312,33 @@ class Topics:
                     ),
                 ],
                 "forceActuatorData",
+                False,
+            ),
+            TopicData(
+                "Cylinder Pressures",
+                [
+                    TopicField(
+                        "Primary Cylinders Push",
+                        "primaryCylinderPushPressures",
+                        FATABLE_ZINDEX,
+                    ),
+                    TopicField(
+                        "Primary Cylinders Pull",
+                        "primaryCylinderPullPressures",
+                        FATABLE_ZINDEX,
+                    ),
+                    TopicField(
+                        "Secondary Cylinder Push",
+                        "secondaryCylinderPushPressures",
+                        FATABLE_SINDEX,
+                    ),
+                    TopicField(
+                        "Secondary Cylinder Pull",
+                        "secondaryCylinderPullPressures",
+                        FATABLE_SINDEX,
+                    ),
+                ],
+                "forceActuatorPressure",
                 False,
             ),
             TopicData(
